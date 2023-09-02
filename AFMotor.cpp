@@ -83,7 +83,11 @@ static AFMotorController MC;
                MOTORS
 ******************************************/
 inline void initPWM1(uint8_t freq) {
-#if defined(__AVR_ATmega8__) || \
+#if defined(ARDUINO_ARCH_ESP32)
+  // arduino pin 11 -> IO23 channel 3
+  ledcAttachPin(23, 3);
+  ledcSetup(3, freq, 8);
+#elif defined(__AVR_ATmega8__) || \
     defined(__AVR_ATmega48__) || \
     defined(__AVR_ATmega88__) || \
     defined(__AVR_ATmega168__) || \
@@ -141,7 +145,10 @@ inline void initPWM1(uint8_t freq) {
 }
 
 inline void setPWM1(uint8_t s) {
-#if defined(__AVR_ATmega8__) || \
+#if defined(ARDUINO_ARCH_ESP32)
+  // arduino pin 11 -> IO23 channel 3
+  ledcWrite(3, s);
+#elif defined(__AVR_ATmega8__) || \
     defined(__AVR_ATmega48__) || \
     defined(__AVR_ATmega88__) || \
     defined(__AVR_ATmega168__) || \
@@ -175,7 +182,11 @@ inline void setPWM1(uint8_t s) {
 }
 
 inline void initPWM2(uint8_t freq) {
-#if defined(__AVR_ATmega8__) || \
+#if defined(ARDUINO_ARCH_ESP32)
+  // arduino pin 3 -> IO25 channel 4
+  ledcAttachPin(25, 4);
+  ledcSetup(4, freq, 8);
+#elif defined(__AVR_ATmega8__) || \
     defined(__AVR_ATmega48__) || \
     defined(__AVR_ATmega88__) || \
     defined(__AVR_ATmega168__) || \
@@ -209,7 +220,10 @@ inline void initPWM2(uint8_t freq) {
 }
 
 inline void setPWM2(uint8_t s) {
-#if defined(__AVR_ATmega8__) || \
+#if defined(ARDUINO_ARCH_ESP32)
+  // arduino pin 3 -> IO25 channel 4
+  ledcWrite(4, s);
+#elif defined(__AVR_ATmega8__) || \
     defined(__AVR_ATmega48__) || \
     defined(__AVR_ATmega88__) || \
     defined(__AVR_ATmega168__) || \
@@ -228,7 +242,11 @@ inline void setPWM2(uint8_t s) {
 }
 
 inline void initPWM3(uint8_t freq) {
-#if defined(__AVR_ATmega8__) || \
+#if defined(ARDUINO_ARCH_ESP32)
+  // arduino pin 6 -> IO17 channel 5
+  ledcAttachPin(17, 5);
+  ledcSetup(5, freq, 8);
+#elif defined(__AVR_ATmega8__) || \
     defined(__AVR_ATmega48__) || \
     defined(__AVR_ATmega88__) || \
     defined(__AVR_ATmega168__) || \
@@ -262,7 +280,10 @@ inline void initPWM3(uint8_t freq) {
 }
 
 inline void setPWM3(uint8_t s) {
-#if defined(__AVR_ATmega8__) || \
+#if defined(ARDUINO_ARCH_ESP32)
+  // arduino pin 6 -> IO17 channel 5
+  ledcWrite(5, s);
+#elif defined(__AVR_ATmega8__) || \
     defined(__AVR_ATmega48__) || \
     defined(__AVR_ATmega88__) || \
     defined(__AVR_ATmega168__) || \
@@ -283,7 +304,11 @@ inline void setPWM3(uint8_t s) {
 
 
 inline void initPWM4(uint8_t freq) {
-#if defined(__AVR_ATmega8__) || \
+#if defined(ARDUINO_ARCH_ESP32)
+  // arduino pin 5 -> IO16 channel 6
+  ledcAttachPin(16, 6);
+  ledcSetup(6, freq, 8);
+#elif defined(__AVR_ATmega8__) || \
     defined(__AVR_ATmega48__) || \
     defined(__AVR_ATmega88__) || \
     defined(__AVR_ATmega168__) || \
@@ -317,7 +342,10 @@ inline void initPWM4(uint8_t freq) {
 }
 
 inline void setPWM4(uint8_t s) {
-#if defined(__AVR_ATmega8__) || \
+#if defined(ARDUINO_ARCH_ESP32)
+  // arduino pin 5 -> IO16 channel 6
+  ledcWrite(6, s);
+#elif defined(__AVR_ATmega8__) || \
     defined(__AVR_ATmega48__) || \
     defined(__AVR_ATmega88__) || \
     defined(__AVR_ATmega168__) || \
@@ -664,4 +692,5 @@ uint8_t AF_Stepper::onestep(uint8_t dir, uint8_t style) {
   MC.latch_tx();
   return currentstep;
 }
+
 
